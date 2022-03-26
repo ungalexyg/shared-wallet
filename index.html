@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Placeholder</title>
+    <script src="node_modules/web3.js-browser/build/web3.min.js"></script>
+</head>
+
+<body>
+    <h2>Account: <span id="addressHolder"></span></h2>
+    <p>ETH Balance: <span id="ethBalance"></span></p>
+    <p>Wei Balance: <span id="weiBalance"></span></p>
+    <script>
+
+        /**
+         * Get address balance
+         */
+        const getBalance = async (accountAddress) => {
+            try {
+                // initiate Web3 provider with Ganache RPC
+                let currentProvider = new Web3.providers.HttpProvider("http://localhost:7545");
+
+                // initiate web3 instance with the provider (this should be set globally once)
+                let w3 = new Web3(currentProvider);
+
+                // interact with Ganache's network via web3
+                let weiBalance = await w3.eth.getBalance(accountAddress);
+                let balance = {
+                    "weiBalance": weiBalance,
+                    "ethBalance": w3.utils.fromWei(weiBalance, "ether")
+                }
+                console.log("async balance:"); console.log(balance);
+                return balance;
+            } catch (rejected) {
+                console.log(rejected);
+            }
+        }
+
+        (function () {
+            (async () => {
+                let accountAddress = "0x3e969535b58ea0C6A1f76392A8cdE862b0EC26B7";
+                balance = await getBalance(accountAddress);
+                document.getElementById("addressHolder").innerHTML = accountAddress;
+                document.getElementById("ethBalance").innerHTML = balance.ethBalance;
+                document.getElementById("weiBalance").innerHTML = balance.weiBalance;
+            })();
+        })();
+    </script>
+</body>
+
+</html>
