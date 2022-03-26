@@ -36,14 +36,15 @@
             }
         }
 
-        (function () {
-            (async () => {
-                let accountAddress = "0x3e969535b58ea0C6A1f76392A8cdE862b0EC26B7";
-                balance = await getBalance(accountAddress);
-                document.getElementById("addressHolder").innerHTML = accountAddress;
-                document.getElementById("ethBalance").innerHTML = balance.ethBalance;
-                document.getElementById("weiBalance").innerHTML = balance.weiBalance;
-            })();
+        (async () => {
+            /* -------------------------------------------------------------- */
+            //dev address
+            let accountAddress = "0x3e969535b58ea0C6A1f76392A8cdE862b0EC26B7";
+            /* -------------------------------------------------------------- */
+            balance = await getBalance(accountAddress);
+            document.getElementById("addressHolder").innerHTML = accountAddress;
+            document.getElementById("ethBalance").innerHTML = balance.ethBalance;
+            document.getElementById("weiBalance").innerHTML = balance.weiBalance;
         })();
     </script>
 </body>
